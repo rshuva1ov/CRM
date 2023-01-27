@@ -1,0 +1,132 @@
+/* MEDIA */
+
+@media (min-width: 1200px) {
+  /* HOVERS */
+
+  .clients__delete:hover {
+    transition: color 0.3s ease-in-out;
+    color: var(--burnt-sienna);
+  }
+
+  .clients__edit:hover {
+    transition: color 0.3s ease-in-out;
+    color: var(--heliotrope);
+  }
+
+  .clients__button:hover {
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    background-color: var(--heliotrope);
+    color: var(--white);
+  }
+
+  .clients__button:hover svg {
+    transition: fill 0.3s ease-in-out;
+    fill: var(--white);
+  }
+
+  .contact__button-name:hover {
+    background-color: var(--gray-suit);
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .contact__item:hover {
+    background-color: var(--mischka);
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .contact__button-delete:hover {
+    border-color: var(--burnt-sienna);
+    transition: border-color 0.3s ease-in-out;
+  }
+
+  .contact__button-delete:hover svg {
+    fill: var(--burnt-sienna);
+    transition: fill 0.3s ease-in-out;
+  }
+
+  .modal__button-contact:hover {
+    color: var(--heliotrope);
+    transition: color 0.3s ease-in-out;
+  }
+
+  .contact__svg-hover.contact__svg-active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  }
+
+  .contact__svg-default.contact__svg-active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  }
+
+  .modal__button-save:hover {
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0.5;
+  }
+
+  .contacts__link:hover .contact-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, transform 0.5s ease-in-out;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .modal__content {
+    max-width: 375px;
+  }
+
+  .modal__form {
+    max-width: 315px;
+  }
+
+  .contact {
+    max-width: 315px;
+  }
+
+  .contact__button-name {
+    max-width: 100px;
+    min-width: 100px;
+    padding: 10px 6px;
+    display: flex;
+    align-content: flex-start;
+  }
+
+  .contact__list {
+    padding: 2px 0 2px;
+    max-width: 100px;
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 390px) {
+  .modal__content {
+    max-width: 315px;
+  }
+
+  .modal__form {
+    max-width: 255px;
+  }
+
+  .contact {
+    max-width: 255px;
+  }
+
+  .delete-modal__content {
+    min-width: 250px;
+  }
+}

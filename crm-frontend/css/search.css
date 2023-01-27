@@ -1,0 +1,31 @@
+/* SEARCH */
+
+.header__inner {
+  position: relative;
+  width: 100%;
+}
+
+.find-list {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  max-width: 581px;
+  top: 47px;
+  left: 0;
+  width: 100%;
+  z-index: 5;
+  background-color: var(--white);
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.15);
+}
+
+.find-list__item {
+  padding: 10px 10px;
+}
+
+.find-list__item:not(:last-child) {
+  border-bottom: 1px solid var(--gray-suit);
+}
+
+.hide {
+  display: none;
+}

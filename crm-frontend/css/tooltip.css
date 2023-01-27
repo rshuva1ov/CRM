@@ -1,0 +1,23 @@
+/* TOOLTIP */
+
+.contact-tooltip {
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  width: auto;
+}
+
+.contact-tooltip__type {
+  margin-right: 2px;
+  display: block;
+  color: var(--white);
+}
+
+.contact-tooltip__value {
+  display: block;
+  text-decoration: underline;
+  font-weight: 700;
+  color: var(--heliotrope);
+}
+
