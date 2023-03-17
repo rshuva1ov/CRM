@@ -102,7 +102,7 @@ export const createClients = () => {
   sortingDisplayEdit.append(editSpan);
   theadTr.append(sortingDisplayId, sortingDisplayName, sortingDisplaySpan, sortingDisplayCreate, sortingDisplayEdit, sortingDisplayContacts, sortingDisplayActions);
   sortingDisplay.append(theadTr);
-  tableWrapper.append(table, addUserButton, createPreloader());
+  tableWrapper.append(table, createPreloader(), addUserButton);
   table.append(sortingDisplay, tableBody);
   addUserButton.append(addUserButtonSvg);
   container.append(h1, tableWrapper);

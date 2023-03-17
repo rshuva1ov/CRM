@@ -97,6 +97,11 @@
   background-color: var(--gray-suit);
 }
 
+.modal__contact-box {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
 .modal__button-contact {
   border: none;
   display: none;

@@ -103,8 +103,9 @@
 
 .clients__button {
   display: flex;
-  margin: auto auto;
   flex-direction: row-reverse;
+  max-width: 1366px;
+  margin: 0 auto 20px auto;
   padding: 12px 26px;
   align-self: center;
   font-size: 14px;
@@ -155,3 +156,7 @@
   position: relative;
 }
 
+
+.test {
+  display: none;
+}

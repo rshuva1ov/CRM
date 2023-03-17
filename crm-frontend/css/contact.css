@@ -122,3 +122,25 @@
   min-width: 150px;
   top: -30px;
 }
+
+.contacts__button-show {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  border: 1px solid var(--heliotrope);
+  border-radius: 50%;
+  margin-bottom: 7px;
+  background-color: transparent;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.contacts__button-text {
+  font-size: 10px;
+  line-height: 12px;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: var(--mine-shaft);
+  flex-direction: column;
+  transition: color 0.3s ease-in-out;
+}

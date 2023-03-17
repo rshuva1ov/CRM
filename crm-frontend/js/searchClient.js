@@ -1,7 +1,11 @@
 // SEARCH CLIENT
 
-import { findClient } from "./clientsAPI.js";
-import { createClientItem } from "./createClientItem.js";
+import {
+  findClient
+} from "./clientsAPI.js";
+import {
+  createClientItem
+} from "./createClientItem.js";
 
 export const searchClients = (clients) => {
   const findList = document.querySelector(".find-list");
@@ -30,14 +34,14 @@ export const searchClients = (clients) => {
       tbody.append(createClientItem(client));
     }
   };
+  const insertMark = (str, pos, len) => str.slice(0, pos) + "<mark>" + str.slice(pos, pos + len) + "</mark>" + str.slice(pos + len);
 
-  input.addEventListener("input", async () => {
+  function enteringText() {
     const value = input.value.trim();
     const foundItems = document.querySelectorAll(".find-list__item");
 
     if (value !== "") {
       rewriteTable(value);
-
       foundItems.forEach((link) => {
         if (link.innerText.search(value) == -1) {
           link.classList.add("hide");
@@ -61,7 +65,18 @@ export const searchClients = (clients) => {
         link.innerHTML = link.innerText;
       });
     }
-  });
+  }
 
-  const insertMark = (str, pos, len) => str.slice(0, pos) + "<mark>" + str.slice(pos, pos + len) + "</mark>" + str.slice(pos + len);
+  function debounce(callee, timeoutMs) {
+    return function perform(...args) {
+      let previousCall = this.lastCall
+      this.lastCall = Date.now()
+      if (previousCall && this.lastCall - previousCall <= timeoutMs) {
+        clearTimeout(this.lastCallTimer)
+      }
+      this.lastCallTimer = setTimeout(() => callee(...args), timeoutMs)
+    }
+  }
+  const debounced = debounce(enteringText, 300)
+  input.oninput = debounced;
 };

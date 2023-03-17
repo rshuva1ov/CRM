@@ -4,7 +4,6 @@ export const getClients = async () => {
   try {
     const response = await fetch("http://localhost:3000/api/clients");
     const result = await response.json();
-    console.log(result);
     return result;
   } catch (error) {
     console.log(error);
@@ -14,9 +13,6 @@ export const getClients = async () => {
 export const sendClientData = async (client, method, id = null) => {
   try {
     const response = await fetch(`http://localhost:3000/api/clients/${method === "POST" ? "" : id}`, {
-      headers: {
-        'Content-Type': 'application/json'
-      },
       method,
       body: JSON.stringify(client),
     });

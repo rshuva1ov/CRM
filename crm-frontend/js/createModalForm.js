@@ -21,6 +21,7 @@ export const createClientsForm = () => {
   const saveButton = document.createElement("button");
   const cancelButton = document.createElement("button");
   const contactsBlock = document.createElement("div");
+  const contactsBox = document.createElement("div");
   const formFloatingName = document.createElement("div");
   const formFloatingSurname = document.createElement("div");
   const formFloatingLastName = document.createElement("div");
@@ -64,6 +65,7 @@ export const createClientsForm = () => {
   contactButtonDefault.classList.add("contact__svg", "contact__svg-default", "contact__svg-active");
   contactButtonHover.classList.add("contact__svg", "contact__svg-hover");
   contactsBlock.classList.add("modal__contact");
+  contactsBox.classList.add("modal__contact-box");
 
   inputName.for = "formFloatingName";
   inputSurname.for = "formFloatingSurname";
@@ -96,7 +98,7 @@ export const createClientsForm = () => {
   formFloatingName.append(inputName, labelName);
   formFloatingSurname.append(inputSurname, labelSurname);
   formFloatingLastName.append(inputLastName, labelLastName);
-  contactsBlock.append(addContactButton);
+  contactsBlock.append(contactsBox, addContactButton);
   errorBlock.append(writeName, writeSurname, writeLastName, reqiredValue, unacceptableLetter, requiredContacts);
   modalForm.append(formFloatingSurname, formFloatingName, formFloatingLastName, contactsBlock, errorBlock, saveButton, cancelButton);
   addContactButton.append(contactButtonDefault, contactButtonHover);
@@ -121,7 +123,7 @@ export const createClientsForm = () => {
 
     if (contactsItems.length < namberOfContacts) {
       const contactItem = createContactItem();
-      contactsBlock.prepend(contactItem.contact);
+      contactsBox.prepend(contactItem.contact);
       contactsBlock.style.backgroundColor = "var(--athens-gray)";
       if (contactsItems.length > 5) {
         document.querySelector(".site-modal__content").style.top = "70%";
@@ -130,7 +132,7 @@ export const createClientsForm = () => {
       }
     } else {
       const contactItem = createContactItem();
-      contactsBlock.prepend(contactItem.contact);
+      contactsBox.prepend(contactItem.contact);
       addContactButton.classList.remove("modal__button-contact--active");
     }
   });
@@ -147,6 +149,7 @@ export const createClientsForm = () => {
     labelSurname,
     labelLastName,
     contactsBlock,
+    contactsBox,
     addContactButton,
   };
 };

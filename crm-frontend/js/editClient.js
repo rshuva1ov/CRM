@@ -1,26 +1,12 @@
 // EDIT CLIENT
 
-import {
-  sendClientData
-} from "./clientsAPI.js";
-import {
-  createClientItem
-} from "./createClientItem.js";
-import {
-  createContactItem
-} from "./createContact.js";
-import {
-  deleteClientModal
-} from "./createDeleteModal.js";
-import {
-  createClientsForm
-} from "./createModalForm.js";
-import {
-  validateClientContact
-} from "./validateContact.js";
-import {
-  validateClientForm
-} from "./validateForm.js";
+import { sendClientData } from "./clientsAPI.js";
+import { createClientItem } from "./createClientItem.js";
+import { createContactItem } from "./createContact.js";
+import { deleteClientModal } from "./createDeleteModal.js";
+import { createClientsForm } from "./createModalForm.js";
+import { validateClientContact } from "./validateContact.js";
+import { validateClientForm } from "./validateForm.js";
 
 export const editClientModal = (data) => {
   const editModal = document.createElement("div");
@@ -34,7 +20,7 @@ export const editClientModal = (data) => {
 
   createForm.modalHeading.textContent = "Изменить данные";
   createForm.cancelButton.textContent = "Удалить клиента";
-  editModalId.textContent = "ID: " + data._id.substr(0, 6);
+  editModalId.textContent = "ID: " + data.id.substr(data.id.length - 5);
 
   //удаление через модалку изменить
   createForm.cancelButton.addEventListener("click", (e) => {
@@ -43,15 +29,13 @@ export const editClientModal = (data) => {
     const deleteModal = deleteClientModal();
     document.body.append(deleteModal.deleteModal);
 
-    import("./clientsAPI.js").then(({
-      deleteClientItem
-    }) => {
+    import("./clientsAPI.js").then(({ deleteClientItem }) => {
       deleteModal.deleteModalDelete.addEventListener("click", () => {
         try {
           deleteModal.deleteSpinner.style.display = "block";
           setTimeout(() => {
-            deleteClientItem(data._id);
-            document.getElementById(data._id).remove();
+            deleteClientItem(data.id);
+            document.getElementById(data.id).remove();
             deleteModal.deleteModal.remove();
             document.querySelector(".modal-edit").remove();
           }, 1300);
@@ -62,10 +46,6 @@ export const editClientModal = (data) => {
         }
       });
     });
-  });
-
-  createForm.modalCloseButton.addEventListener("click", () => {
-    editModal.remove();
   });
 
   createForm.inputName.value = data.name;
@@ -82,7 +62,7 @@ export const editClientModal = (data) => {
     createForm.contactsBlock.style.backgroundColor = "var(--athens-gray)";
   }
 
-  if (data.contacts.lelength == 10) {
+  if (data.contacts.length >= 10) {
     createForm.addContactButton.classList.remove("modal__button-contact--active");
   }
 
@@ -117,16 +97,18 @@ export const editClientModal = (data) => {
 
     try {
       spinner.style.display = "block";
-      const editedData = await sendClientData(client, "PATCH", data._id);
-      document.querySelector(".clients__tbody").replaceChild(
-        createClientItem(editedData),
-        document.getElementById(editedData._id)
-      );
-      editModal.remove();
+      const editedData = await sendClientData(client, "PATCH", data.id);
+      setTimeout(() => {
+        document.getElementById(editedData.id).remove();
+        document.querySelector(".clients__tbody").append(createClientItem(editedData));
+        document.querySelector(".modal-edit").remove();
+      }, 1300);
     } catch (error) {
       console.log(error);
     } finally {
-      spinner.style.display = "none";
+      setTimeout(() => {
+        spinner.style.display = "none";
+      }, 1300);
     }
   });
 

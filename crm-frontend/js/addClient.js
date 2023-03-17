@@ -1,20 +1,10 @@
 // MODAL ADD CLIENT
 
-import {
-  createClientsForm
-} from "./createModalForm.js";
-import {
-  sendClientData
-} from "./clientsAPI.js";
-import {
-  validateClientForm
-} from "./validateForm.js";
-import {
-  validateClientContact
-} from "./validateContact.js";
-import {
-  createClientItem
-} from "./createClientItem.js";
+import { createClientsForm } from "./createModalForm.js";
+import { sendClientData } from "./clientsAPI.js";
+import { validateClientForm } from "./validateForm.js";
+import { validateClientContact } from "./validateContact.js";
+import { createClientItem } from "./createClientItem.js";
 
 export const addClientModal = () => {
   const createForm = createClientsForm();
@@ -59,12 +49,16 @@ export const addClientModal = () => {
     try {
       spinner.style.display = "block";
       const data = await sendClientData(clientObject, "POST");
-      document.querySelector(".clients__tbody").append(createClientItem(data));
-      document.querySelector(".modal").remove();
+      setTimeout(() => {
+        document.querySelector(".clients__tbody").append(createClientItem(data));
+        document.querySelector(".modal").remove();
+      }, 1300);
     } catch (error) {
       console.log(error);
     } finally {
-      spinner.style.display = "none";
+      setTimeout(() => {
+        spinner.style.display = "none";
+      }, 1300);
     }
   });
 

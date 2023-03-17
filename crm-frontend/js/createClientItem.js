@@ -26,11 +26,13 @@ export const createClientItem = (data) => {
   const editClient = editClientModal(data);
   const editSpinner = document.createElement("span");
   const deleteSpinner = document.createElement("span");
+  const contactShowButoon = document.createElement("a");
+  const contactCounter = document.createElement("span");
 
   editSpinner.classList.add("actions__spinner");
   deleteSpinner.classList.add("actions__spinner2");
   clientTr.classList.add("clients__item");
-  clientTr.id = data._id;
+  clientTr.id = data.id;
   clientIdTd.classList.add("clients__id");
   clientFullName.classList.add("clients__full-name");
   clientName.classList.add("clients__name");
@@ -46,10 +48,37 @@ export const createClientItem = (data) => {
   clientActions.classList.add("clients__actions");
   clientDelete.classList.add("clients__delete");
   clientEdit.classList.add("clients__edit");
+  contactShowButoon.classList.add("contacts__button-show", "hide");
+  contactCounter.classList.add("contacts__button-text");
+  contactCounter.textContent = "+0";
 
-  for (const contact of data.contacts) {
-    createContactItemByType(contact.type, contact.value, clientContacts);
+  const createCotactsHide = (data) => {
+    for (let i = 4; i < data.length; i++) {
+      const element = data[i];
+      element.classList.add("hide");
+    }
+  };
+
+  const createButtonOpenHide = () => {
+    contactShowButoon.classList.remove("hide");
+  };
+
+  for (let i = 0; i < data.contacts.length; i++) {
+    createContactItemByType(data.contacts[i].type, data.contacts[i].value, clientContacts);
+    if (i > 4) {
+      createCotactsHide(clientContacts.childNodes);
+      createButtonOpenHide();
+      contactCounter.textContent = `+${data.contacts.length - 4}`;
+    }
   }
+
+  contactShowButoon.addEventListener("click", () => {
+    for (let i = 0; i < clientContacts.childNodes.length; i++) {
+      const element = clientContacts.childNodes[i];
+      element.classList.remove("hide");
+    }
+    contactShowButoon.classList.add("hide");
+  });
 
   const deleteById = () => {
     import("./clientsAPI.js").then(({ deleteClientItem }) => {
@@ -57,8 +86,8 @@ export const createClientItem = (data) => {
         try {
           deleteClient.deleteSpinner.style.display = "block";
           setTimeout(() => {
-            deleteClientItem(data._id);
-            document.getElementById(data._id).remove();
+            deleteClientItem(data.id);
+            document.getElementById(data.id).remove();
             deleteClient.deleteModal.remove();
           }, 1300);
         } catch (error) {
@@ -94,7 +123,7 @@ export const createClientItem = (data) => {
     }, 1300);
   });
 
-  clientId.textContent = data._id.substr(0, 6);
+  clientId.textContent = data.id.substr(data.id.length - 5);
   clientName.textContent = data.name;
   clientSurname.textContent = data.surname;
   clientLastname.textContent = data.lastName;
@@ -113,6 +142,8 @@ export const createClientItem = (data) => {
   clientDelete.append(deleteSpinner);
   clientEdit.append(editSpinner);
   clientActions.append(clientEdit, clientDelete);
+  contactShowButoon.append(contactCounter);
+  clientContacts.append(contactShowButoon);
   clientTr.append(clientIdTd, clientFullName, clientCreated, clientChanged, clientContacts, clientActions);
 
   return clientTr;
